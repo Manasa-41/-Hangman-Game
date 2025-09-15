@@ -1,0 +1,27 @@
+import random
+
+words = ["apple", "train", "robot", "pizza", "cloud"]
+word = random.choice(words)
+guessed = set()
+tries = 6
+
+while tries > 0:
+    display = " ".join([c if c in guessed else "_" for c in word])
+    print("Word:", display)
+    guess = input("Guess a letter: ").lower()
+    
+    if guess in guessed:
+        print("Already guessed.\n")
+        continue
+    guessed.add(guess)
+    
+    if guess in word:
+        print("Good guess!\n")
+        if all(c in guessed for c in word):
+            print("Congrats! You guessed:", word)
+            break
+    else:
+        tries -= 1
+        print(f"Wrong! {tries} tries left.\n")
+else:
+    print("Game over! The word was:", word)
